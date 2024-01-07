@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "677196067286",
+    "project_id": "mehmetcanmovies",
+    "storage_bucket": "mehmetcanmovies.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677196067286:android:b5cc4bd41b2512c4247477",
+        "android_client_info": {
+          "package_name": "com.example.mehmetcanmovies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677196067286-0tsatv00ul83q7eluvts87vqucc4ji4k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS_WVMT-eg7bCJTDADfYAhX-5jWvJT8zo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677196067286-0tsatv00ul83q7eluvts87vqucc4ji4k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
