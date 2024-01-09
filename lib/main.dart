@@ -1,5 +1,7 @@
+import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:mehmetcanmovies/firebase_options.dart';
 
 import 'package:mehmetcanmovies/form/form1.dart';
@@ -10,6 +12,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Alarm.init();
   runApp(MyApp());
 }
 

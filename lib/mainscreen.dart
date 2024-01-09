@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mehmetcanmovies/alarmscreen.dart';
 import 'package:mehmetcanmovies/profil/profil.dart';
-import 'package:mehmetcanmovies/search.dart';
-
 import 'package:mehmetcanmovies/videopages/Vvideopage9.dart';
 import 'package:mehmetcanmovies/videopages/videopage1.dart';
 import 'package:mehmetcanmovies/videopages/videopage10.dart';
@@ -55,28 +54,33 @@ class _goState extends State<go> {
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.black,
+        title: Text(
+          "MOVIES",
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AlarmScreen()),
+                );
+              },
+              icon: Icon(Icons.alarm)),
+        ),
+        centerTitle: true,
         actions: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 108),
-                child: Text(
-                  "MOVIES",
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()),
-                      );
-                    },
-                    icon: Icon(Icons.person)),
-              )
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                },
+                icon: Icon(Icons.person)),
           )
         ],
       ),
