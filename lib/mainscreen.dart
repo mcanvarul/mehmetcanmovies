@@ -17,6 +17,9 @@ import 'package:mehmetcanmovies/videopages/videopage5.dart';
 import 'package:mehmetcanmovies/videopages/videopage6.dart';
 import 'package:mehmetcanmovies/videopages/videopage7.dart';
 import 'package:mehmetcanmovies/videopages/videopage8.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+enum Category { action, comedy, horror, romance, drama, adventure, thriller }
 
 class mainscreen extends StatefulWidget {
   const mainscreen({super.key});
@@ -49,9 +52,107 @@ class go extends StatefulWidget {
 }
 
 class _goState extends State<go> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late String _category;
+  Category? _categoryEnum;
+  Future<void> getCategory() async {
+    final SharedPreferences prefs = await _prefs;
+    setState(() {
+      _category = (prefs.getString('category') ?? Category.action.name);
+    });
+    if (_category == Category.action.name) {
+      _categoryEnum = Category.action;
+    } else if (_category == Category.comedy.name) {
+      _categoryEnum = Category.comedy;
+    } else if (_category == Category.horror.name) {
+      _categoryEnum = Category.horror;
+    } else if (_category == Category.romance.name) {
+      _categoryEnum = Category.romance;
+    } else if (_category == Category.drama.name) {
+      _categoryEnum = Category.drama;
+    } else if (_category == Category.adventure.name) {
+      _categoryEnum = Category.adventure;
+    } else if (_category == Category.thriller.name) {
+      _categoryEnum = Category.thriller;
+    }
+  }
+
+  @override
+  void initState() {
+    getCategory();
+    super.initState();
+  }
+
+  List<Widget> action = [
+    VideoScreen()
+    // action films
+    // sayfaları buraya ekle
+  ];
+  List<Widget> comedy = [
+    // comedy films
+  ];
+  List<Widget> horror = [
+    // horror films
+  ];
+  List<Widget> romance = [
+    // romance films
+  ];
+  List<Widget> drama = [
+    // drama films
+  ];
+  List<Widget> adventure = [
+    // adventure films
+  ];
+  List<Widget> thriller = [
+    // thriller films
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        switch (_categoryEnum) {
+          case Category.action:
+            {
+              setState(() {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => (action.toList()..shuffle()).first));
+              });
+            }
+          case Category.comedy:
+            {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => (comedy.toList()..shuffle()).first));
+            }
+          case Category.horror:
+            {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => (horror.toList()..shuffle()).first));
+            }
+          case Category.romance:
+            {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => (romance.toList()..shuffle()).first));
+            }
+          case Category.drama:
+            {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => (drama.toList()..shuffle()).first));
+            }
+          case Category.adventure:
+            {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => (adventure.toList()..shuffle()).first));
+            }
+          case Category.thriller:
+            {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => (thriller.toList()..shuffle()).first));
+            }
+          case null:
+          // TODO: Handle this case.
+        }
+      }),
       appBar: new AppBar(
         backgroundColor: Colors.black,
         title: Text(

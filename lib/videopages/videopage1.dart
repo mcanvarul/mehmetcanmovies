@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
+import 'package:mehmetcanmovies/mainscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:video_player/video_player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart' as fireStore;
 
@@ -42,7 +45,23 @@ class _VideoScreenState extends State<VideoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.orange,
+          child: Icon(
+            Icons.add,
+            color: Colors.black,
+          ),
+          onPressed: () async {
+            final SharedPreferences prefs = await _prefs;
+            (prefs.getString('category') ??
+                Category.action.name); // chose category
+
+            launchUrlString(
+                "https://www.youtube.com/watch?v=Jne9t8sHpUc&ab_channel=MovieclipsTrailers",
+                mode: LaunchMode.inAppBrowserView);
+          }),
       appBar: AppBar(
         backgroundColor: Colors.black,
       ),
@@ -58,13 +77,13 @@ class _VideoScreenState extends State<VideoScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 20),
+              margin: const EdgeInsets.only(top: 20),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 1 / 16,
               decoration: BoxDecoration(
                   color: Colors.orange,
                   borderRadius: BorderRadius.circular(10)),
-              child: Center(
+              child: const Center(
                 child: Text(
                   "HOBBIT - TRAILER",
                   style: TextStyle(
@@ -74,8 +93,8 @@ class _VideoScreenState extends State<VideoScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 300, top: 40),
+            const Padding(
+              padding: EdgeInsets.only(right: 300, top: 40),
               child: Text(
                 "Description:",
                 style: TextStyle(
@@ -89,7 +108,7 @@ class _VideoScreenState extends State<VideoScreen> {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 5 / 16,
-                child: Text(
+                child: const Text(
                   "It's about a team of dwarves led by Bilbo Baggins and Thorin Oakenshield confronting the dragon Smaug to retrieve the lost treasures of Erebor. Bilbo and the dwarves embark on an adventurous journey through the wastelands as they encounter various dangers including orcs, giant spiders and the inhabitants of Laketown. Confronted with the wrath and power of Smaug, Bilbo takes on the arduous task of helping his team achieve their goal and re-establish the kingdom of Erebor.",
                   style: TextStyle(color: Colors.white, fontSize: 13.5),
                 ),
@@ -101,15 +120,15 @@ class _VideoScreenState extends State<VideoScreen> {
                 return ListTile(
                   title: Text(
                     requests[index]["user"],
-                    style: TextStyle(color: Colors.white24),
+                    style: const TextStyle(color: Colors.white24),
                   ),
                   subtitle: Text(
                     requests[index]["comment"],
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   trailing: Text(
                     "${requests[index]["date"].toDate().day}/${requests[index]["date"].toDate().month}/${requests[index]["date"].toDate().year}",
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 );
               },
@@ -118,7 +137,7 @@ class _VideoScreenState extends State<VideoScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Yorumunuzu giriniz",
                   hintStyle: TextStyle(color: Colors.white),
                   labelText: "Yorum",
@@ -139,7 +158,7 @@ class _VideoScreenState extends State<VideoScreen> {
                 onPressed: () {
                   firebaseAddRequest(commentController, context);
                 },
-                child: Text("Gönder"),
+                child: const Text("Gönder"),
               ),
             ),
           ],
