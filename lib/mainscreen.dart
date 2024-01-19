@@ -61,11 +61,17 @@ class _goState extends State<go> {
       _category = (prefs.getString('category') ?? Category.action.name);
     });
     if (_category == Category.action.name) {
-      _categoryEnum = Category.action;
+      setState(() {
+        _categoryEnum = Category.action;
+      });
     } else if (_category == Category.comedy.name) {
-      _categoryEnum = Category.comedy;
+      setState(() {
+        _categoryEnum = Category.comedy;
+      });
     } else if (_category == Category.horror.name) {
-      _categoryEnum = Category.horror;
+      setState(() {
+        _categoryEnum = Category.horror;
+      });
     } else if (_category == Category.romance.name) {
       _categoryEnum = Category.romance;
     } else if (_category == Category.drama.name) {
@@ -84,12 +90,18 @@ class _goState extends State<go> {
   }
 
   List<Widget> action = [
-    VideoScreen()
+    VideoScreen12(),
+    VideoScreen13(),
+    VideoScreen14(),
+
     // action films
     // sayfaları buraya ekle
   ];
   List<Widget> comedy = [
     // comedy films
+    VideoScreen11(),
+    VideoScreen10(),
+    VideoScreen9(),
   ];
   List<Widget> horror = [
     // horror films
@@ -109,6 +121,8 @@ class _goState extends State<go> {
 
   @override
   Widget build(BuildContext context) {
+    getCategory();
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(onPressed: () {
         switch (_categoryEnum) {

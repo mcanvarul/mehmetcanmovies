@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
+import 'package:mehmetcanmovies/mainscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoScreen2 extends StatefulWidget {
@@ -36,6 +39,20 @@ class _VideoScreen2State extends State<VideoScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.orange,
+          child: Icon(
+            Icons.add,
+            color: Colors.black,
+          ),
+          onPressed: () async {
+            Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+            final SharedPreferences prefs = await _prefs;
+            prefs.setString('category', Category.comedy.name); // chose category
+
+            launchUrlString("https://www.netflix.com/tr/",
+                mode: LaunchMode.inAppBrowserView);
+          }),
       appBar: AppBar(
         backgroundColor: Colors.black,
       ),
@@ -49,7 +66,6 @@ class _VideoScreen2State extends State<VideoScreen2> {
             ),
           ),
           Container(
-            
             margin: EdgeInsets.only(top: 20),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 1 / 16,

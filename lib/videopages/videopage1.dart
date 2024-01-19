@@ -45,7 +45,6 @@ class _VideoScreenState extends State<VideoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.orange,
@@ -54,12 +53,11 @@ class _VideoScreenState extends State<VideoScreen> {
             color: Colors.black,
           ),
           onPressed: () async {
+            Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
             final SharedPreferences prefs = await _prefs;
-            (prefs.getString('category') ??
-                Category.action.name); // chose category
+            prefs.setString('category', Category.action.name); // chose category
 
-            launchUrlString(
-                "https://www.youtube.com/watch?v=Jne9t8sHpUc&ab_channel=MovieclipsTrailers",
+            launchUrlString("https://www.netflix.com/tr/",
                 mode: LaunchMode.inAppBrowserView);
           }),
       appBar: AppBar(
