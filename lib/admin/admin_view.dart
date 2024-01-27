@@ -50,7 +50,7 @@ class _AdminViewState extends State<AdminView> with AdminViewMixin {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Basic dialog title'),
+          title: Text('Movies APP'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -61,6 +61,7 @@ class _AdminViewState extends State<AdminView> with AdminViewMixin {
                     labelText: 'Enter The Movie Name',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   controller: movieDescriptionController,
                   decoration: InputDecoration(
@@ -68,6 +69,7 @@ class _AdminViewState extends State<AdminView> with AdminViewMixin {
                     labelText: 'Enter The Movie Description',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   controller: movieCategoryController,
                   decoration: InputDecoration(
@@ -75,6 +77,7 @@ class _AdminViewState extends State<AdminView> with AdminViewMixin {
                     labelText: 'Enter The Movie Category',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   controller: movieDirectorController,
                   decoration: InputDecoration(
@@ -82,6 +85,7 @@ class _AdminViewState extends State<AdminView> with AdminViewMixin {
                     labelText: 'Director',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   controller: movieActorsController,
                   decoration: InputDecoration(
@@ -89,6 +93,7 @@ class _AdminViewState extends State<AdminView> with AdminViewMixin {
                     labelText: 'Enter The Movie Actors',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   controller: movieRatingController,
                   decoration: InputDecoration(
@@ -130,30 +135,28 @@ class _AdminViewState extends State<AdminView> with AdminViewMixin {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Alarm dialog title'),
+          title: Text('Movies APP'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 TextField(
                   controller: alarmNameController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16)),
                     labelText: 'Enter The Movie Name',
                   ),
+                ),
+                SizedBox(
+                  height: 15,
                 ),
                 ElevatedButton(
                     onPressed: () async {
                       await selectAlarm();
                     },
                     child: Text("Select Alarm Image")),
+                SizedBox(height: 15),
                 ElevatedButton(
-                    onPressed: () async {
-                      await addAlarm();
-                      await loadAlarm();
-                      Navigator.of(context).pop();
-                    },
-                    child: Text("Save")),
-                ElevatedButton.icon(
                     onPressed: () async {
                       alarmDate = (await showOmniDateTimePicker(
                             context: context,
@@ -196,8 +199,18 @@ class _AdminViewState extends State<AdminView> with AdminViewMixin {
                         // write the function
                       }
                     },
-                    icon: Icon(Icons.alarm),
-                    label: Text("Hatırlatma Ayarla"))
+                    child: Text("Choose a Date")),
+                SizedBox(height: 15),
+                ElevatedButton(
+                    onPressed: () async {
+                      await addAlarm();
+                      await loadAlarm();
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Save")),
+                SizedBox(
+                  height: 15,
+                ),
               ],
             ),
           ),

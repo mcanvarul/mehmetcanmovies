@@ -17,7 +17,7 @@ class _LoginViewState extends State<LoginView> with LoginViewMixin {
         constraints: constraints,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Login'),
+            title: const Text('Movies APP'),
           ),
           body: Center(
             child: Column(
@@ -46,10 +46,13 @@ class _LoginViewState extends State<LoginView> with LoginViewMixin {
                           labelText: 'Email',
                         ),
                       ),
-                      TextFormField(
-                        controller: passwordController,
-                        decoration: const InputDecoration(
-                          labelText: 'Password',
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        child: TextFormField(
+                          controller: passwordController,
+                          decoration: const InputDecoration(
+                            labelText: 'Password',
+                          ),
                         ),
                       ),
                     ],

@@ -16,7 +16,7 @@ class _SignUpViewState extends State<SignUpView> with SignUpViewMixin {
         constraints: constraints,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Sign Up'),
+            title: const Text('Movies APP'),
           ),
           body: Center(
             child: Column(
@@ -47,11 +47,14 @@ class _SignUpViewState extends State<SignUpView> with SignUpViewMixin {
                           labelText: 'Email',
                         ),
                       ),
-                      TextFormField(
-                        validator: validatePassword,
-                        controller: passwordController,
-                        decoration: const InputDecoration(
-                          labelText: 'Password',
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        child: TextFormField(
+                          validator: validatePassword,
+                          controller: passwordController,
+                          decoration: const InputDecoration(
+                            labelText: 'Password',
+                          ),
                         ),
                       ),
                       TextFormField(
@@ -64,11 +67,14 @@ class _SignUpViewState extends State<SignUpView> with SignUpViewMixin {
                     ],
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () async {
-                    await signUp(context);
-                  },
-                  child: const Text('Sign Up'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 14),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await signUp(context);
+                    },
+                    child: const Text('Sign Up'),
+                  ),
                 ),
               ],
             ),
