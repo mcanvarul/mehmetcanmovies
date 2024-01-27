@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
 
-class video extends StatefulWidget {
+class VideoPlayer extends StatefulWidget {
   final VideoPlayerController videoPlayerController;
   final bool looping;
   final bool autoplay;
 
-  video(
+  VideoPlayer(
       {required this.videoPlayerController,
       required this.autoplay,
       required this.looping,
@@ -15,10 +15,10 @@ class video extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<video> createState() => _videoState();
+  State<VideoPlayer> createState() => _videoState();
 }
 
-class _videoState extends State<video> {
+class _videoState extends State<VideoPlayer> {
   late ChewieController _chewieController;
 
   @override
@@ -31,7 +31,7 @@ class _videoState extends State<video> {
       looping: widget.looping,
       aspectRatio: 6 / 4,
       errorBuilder: (context, errorMessage) {
-        return Center(
+        return const Center(
           child: Text("ERROR"),
         );
       },
