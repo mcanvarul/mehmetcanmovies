@@ -49,6 +49,7 @@ mixin SignUpViewMixin on State<SignUpView> {
           email: emailController.text,
           password: passwordController.text,
         );
+        FirebaseAuth.instance.currentUser!.sendEmailVerification();
 
         User? user = userCredential.user;
 
@@ -56,9 +57,26 @@ mixin SignUpViewMixin on State<SignUpView> {
           await user.updateDisplayName(userNameController.text);
 
           // ignore: use_build_context_synchronously
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => LoginView()),
+          await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Oops'),
+                content: const Text(
+                    'Your account has been created. Please verify your email address'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginView()),
+                      );
+                    },
+                    child: const Text('Ok'),
+                  ),
+                ],
+              );
+            },
           );
         }
       } catch (e) {

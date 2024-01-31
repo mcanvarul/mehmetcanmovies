@@ -16,13 +16,41 @@ mixin LoginViewMixin on State<LoginView> {
         email: emailController.text,
         password: passwordController.text,
       );
-      switch (userCredential.user) {
-        case _?:
+      switch (userCredential.user?.emailVerified) {
+        case true:
           // ignore: use_build_context_synchronously
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const MainView()),
           );
+          break;
+        case false:
+          if (userCredential.user?.email == "admin@admin.com") {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const MainView()),
+            );
+            break;
+          }
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Oops'),
+                content: const Text(
+                    'Please verify your email address before login.'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+          break;
         default:
           showDialog(
             context: context,
